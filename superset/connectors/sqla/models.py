@@ -175,7 +175,9 @@ class DatasourceKind(StrEnum):
     PHYSICAL = "physical"
 
 
-class BaseDatasource(AuditMixinNullable, ImportExportMixin):  # pylint: disable=too-many-public-methods
+class BaseDatasource(
+    AuditMixinNullable, ImportExportMixin
+):  # pylint: disable=too-many-public-methods
     """A common interface to objects that are queryable
     (tables and datasources)"""
 
@@ -1752,7 +1754,7 @@ class SqlaTable(
         try:
             df = self.database.get_df(
                 sql,
-                None,
+                self.catalog,
                 self.schema or None,
                 mutator=assign_column_label,
             )
